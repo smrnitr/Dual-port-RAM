@@ -1,0 +1,14 @@
+module ram3(dout,din,wr,cs,addr);
+parameter ADR_SIZE=10,WORD_SIZE=8, MEM_SIZE=1024;
+output [WORD_SIZE-1:0]dout;
+input [WORD_SIZE-1:0]din;
+input [ADR_SIZE-1:0]addr;
+input wr,cs;
+
+reg [WORD_SIZE-1:0]mem [MEM_SIZE-1:0];
+
+assign dout=mem[addr]; //always performing read operation through the dout wire.
+always@(wr or cs)
+if (wr && cs) mem[addr]=din;
+
+endmodule
